@@ -25,21 +25,20 @@
 
 namespace WPEFramework {
 namespace Exchange {
-namespace IDeviceInfo {
     
-    struct EXTERNAL IProperties : virtual public Core::IUnknown {
+    struct EXTERNAL IDeviceProperties : virtual public Core::IUnknown {
         enum { ID = ID_DEVICE_PROPERTIES };
 
-        ~IProperties() override = default;
+        ~IDeviceProperties() override = default;
 
         virtual const string Chipset() const = 0;
         virtual const string FirmwareVersion() const = 0;
     };
 
-    struct EXTERNAL ICapabilities : virtual public Core::IUnknown {
+    struct EXTERNAL IDeviceCapabilities : virtual public Core::IUnknown {
         enum { ID = ID_DEVICE_CAPABILITIES };
 
-        ~ICapabilities() override = default;
+        ~IDeviceCapabilities() override = default;
 
         enum AudioOutput : uint8_t {
             AUDIO_OTHER,
@@ -76,6 +75,12 @@ namespace IDeviceInfo {
             RESOLUTION_4320P60,
         };
 
+        enum HDROutputType : uint8_t {
+            HDR_UNAVAILABLE,
+            HDR_VIDEO,
+            HDR_FULL
+        };
+
         enum CopyProtection : uint8_t {
             HDCP_UNAVAILABLE,
             HDCP_14,
@@ -94,13 +99,10 @@ namespace IDeviceInfo {
         virtual uint32_t VideoOutputs(IVideoOutputIterator*& res /* @out */) const = 0;
         virtual uint32_t Resolutions(IOutputResolutionIterator*& res /* @out */) const = 0;
 
-        virtual uint32_t HDR(bool& supportsHDR /*@out*/) const = 0;
+        virtual uint32_t HDR(HDROutputType& supportsHDR /*@out*/) const = 0;
         virtual uint32_t Atmos(bool& supportsAtmos /*@out*/) const = 0;
         virtual uint32_t CEC(bool& supportsCEC /*@out*/) const = 0;
         virtual uint32_t HDCP(CopyProtection& supportedHDCP /*@out*/) const = 0;
-
-
     };
-}
 }
 }

@@ -31,7 +31,7 @@
 #include <interfaces/IConfiguration.h>
 #include <interfaces/IContentDecryption.h>
 #include <interfaces/ICustomerCareOperations.h>
-#include <interfaces/IDeviceIdentification.h>
+#include <interfaces/IDeviceInfo.h>
 #include <interfaces/IDictionary.h>
 #include <interfaces/IDisplayInfo.h>
 #include <interfaces/IDialServer.h>
@@ -160,48 +160,54 @@ ENUM_CONVERSION_BEGIN(Exchange::External::Metadata::protocol)
     { Exchange::External::Metadata::protocol::VIRTUAL,  _TXT(_T("Virtual"))  },
 ENUM_CONVERSION_END(Exchange::External::Metadata::protocol)
 
-ENUM_CONVERSION_BEGIN(Exchange::IDeviceInfo::ICapabilities::AudioOutput)
-    { Exchange::IDeviceInfo::ICapabilities::AudioOutput::AUDIO_OTHER, _TXT("other") },
-    { Exchange::IDeviceInfo::ICapabilities::AudioOutput::AUDIO_ANALOG, _TXT("analog") },
-    { Exchange::IDeviceInfo::ICapabilities::AudioOutput::AUDIO_DISPLAYPORT, _TXT("displayport") },
-    { Exchange::IDeviceInfo::ICapabilities::AudioOutput::AUDIO_HDMI, _TXT("hdmi") },
-    { Exchange::IDeviceInfo::ICapabilities::AudioOutput::AUDIO_RF_MODULATOR, _TXT("rf_modulator") },
-    { Exchange::IDeviceInfo::ICapabilities::AudioOutput::AUDIO_SPDIF, _TXT("spdif") },
-ENUM_CONVERSION_END(Exchange::IDeviceInfo::ICapabilities::AudioOutput)
+ENUM_CONVERSION_BEGIN(Exchange::IDeviceCapabilities::HDROutputType)
+    { Exchange::IDeviceCapabilities::HDROutputType::HDR_UNAVAILABLE, _TXT("unavailable") },
+    { Exchange::IDeviceCapabilities::HDROutputType::HDR_VIDEO,       _TXT("hdr_video") },
+    { Exchange::IDeviceCapabilities::HDROutputType::HDR_FULL,        _TXT("hdr_full") },
+ENUM_CONVERSION_END(Exchange::IDeviceCapabilities::HDROutputType)
+        
+ENUM_CONVERSION_BEGIN(Exchange::IDeviceCapabilities::AudioOutput)
+    { Exchange::IDeviceCapabilities::AudioOutput::AUDIO_OTHER, _TXT("other") },
+    { Exchange::IDeviceCapabilities::AudioOutput::AUDIO_ANALOG, _TXT("analog") },
+    { Exchange::IDeviceCapabilities::AudioOutput::AUDIO_DISPLAYPORT, _TXT("displayport") },
+    { Exchange::IDeviceCapabilities::AudioOutput::AUDIO_HDMI, _TXT("hdmi") },
+    { Exchange::IDeviceCapabilities::AudioOutput::AUDIO_RF_MODULATOR, _TXT("rf_modulator") },
+    { Exchange::IDeviceCapabilities::AudioOutput::AUDIO_SPDIF, _TXT("spdif") },
+ENUM_CONVERSION_END(Exchange::IDeviceCapabilities::AudioOutput)
 
-ENUM_CONVERSION_BEGIN(Exchange::IDeviceInfo::ICapabilities::VideoOutput)
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_COMPONENT, _TXT("component") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_COMPOSITE, _TXT("composite") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_DISPLAYPORT, _TXT("displayport") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_HDMI, _TXT("hdmi") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_OTHER, _TXT("other") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_RF_MODULATOR, _TXT("rf_modulator") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_SCART_RGB, _TXT("scart_rgb") },
-    { Exchange::IDeviceInfo::ICapabilities::VideoOutput::VIDEO_SVIDEO, _TXT("svideo") },
-ENUM_CONVERSION_END(Exchange::IDeviceInfo::ICapabilities::VideoOutput)
+ENUM_CONVERSION_BEGIN(Exchange::IDeviceCapabilities::VideoOutput)
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_COMPONENT, _TXT("component") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_COMPOSITE, _TXT("composite") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_DISPLAYPORT, _TXT("displayport") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_HDMI, _TXT("hdmi") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_OTHER, _TXT("other") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_RF_MODULATOR, _TXT("rf_modulator") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_SCART_RGB, _TXT("scart_rgb") },
+    { Exchange::IDeviceCapabilities::VideoOutput::VIDEO_SVIDEO, _TXT("svideo") },
+ENUM_CONVERSION_END(Exchange::IDeviceCapabilities::VideoOutput)
 
-ENUM_CONVERSION_BEGIN(Exchange::IDeviceInfo::ICapabilities::OutputResolution)
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_1080I, _TXT("1080i") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_1080P, _TXT("1080p") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_2160P30, _TXT("2160p30") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_2160P60, _TXT("2160p60") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_4320P30, _TXT("4320p30") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_4320P60, _TXT("4320p60") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_480I, _TXT("480i") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_480P, _TXT("480p") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_576I, _TXT("576i") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_576P, _TXT("576p") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_720P, _TXT("720p") },
-    { Exchange::IDeviceInfo::ICapabilities::OutputResolution::RESOLUTION_UNKNOWN, _TXT("unknown") },
-ENUM_CONVERSION_END(Exchange::IDeviceInfo::ICapabilities::OutputResolution)
+ENUM_CONVERSION_BEGIN(Exchange::IDeviceCapabilities::OutputResolution)
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_1080I, _TXT("1080i") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_1080P, _TXT("1080p") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_2160P30, _TXT("2160p30") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_2160P60, _TXT("2160p60") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_4320P30, _TXT("4320p30") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_4320P60, _TXT("4320p60") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_480I, _TXT("480i") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_480P, _TXT("480p") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_576I, _TXT("576i") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_576P, _TXT("576p") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_720P, _TXT("720p") },
+    { Exchange::IDeviceCapabilities::OutputResolution::RESOLUTION_UNKNOWN, _TXT("unknown") },
+ENUM_CONVERSION_END(Exchange::IDeviceCapabilities::OutputResolution)
 
-ENUM_CONVERSION_BEGIN(Exchange::IDeviceInfo::ICapabilities::CopyProtection)
-    { Exchange::IDeviceInfo::ICapabilities::CopyProtection::HDCP_UNAVAILABLE, _TXT("unavailable") },
-    { Exchange::IDeviceInfo::ICapabilities::CopyProtection::HDCP_14, _TXT("hdcp_14") },
-    { Exchange::IDeviceInfo::ICapabilities::CopyProtection::HDCP_20, _TXT("hdcp_20") },
-    { Exchange::IDeviceInfo::ICapabilities::CopyProtection::HDCP_21, _TXT("hdcp_21") },
-    { Exchange::IDeviceInfo::ICapabilities::CopyProtection::HDCP_22, _TXT("hdcp_22") },
-ENUM_CONVERSION_END(Exchange::IDeviceInfo::ICapabilities::CopyProtection)
+ENUM_CONVERSION_BEGIN(Exchange::IDeviceCapabilities::CopyProtection)
+    { Exchange::IDeviceCapabilities::CopyProtection::HDCP_UNAVAILABLE, _TXT("unavailable") },
+    { Exchange::IDeviceCapabilities::CopyProtection::HDCP_14, _TXT("hdcp_14") },
+    { Exchange::IDeviceCapabilities::CopyProtection::HDCP_20, _TXT("hdcp_20") },
+    { Exchange::IDeviceCapabilities::CopyProtection::HDCP_21, _TXT("hdcp_21") },
+    { Exchange::IDeviceCapabilities::CopyProtection::HDCP_22, _TXT("hdcp_22") },
+ENUM_CONVERSION_END(Exchange::IDeviceCapabilities::CopyProtection)
 
 namespace Exchange
 {
